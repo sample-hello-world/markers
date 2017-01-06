@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" 
+		targetNamespace="http://www.bpmnwithactiviti.org"  xmlns:activiti="http://activiti.org/bpmn" >
+		
+	<process id="temperaturecropprocess" name="Temperature and Crop process">
+		<startEvent id="startevent1" name="Start"/>
+		<sequenceFlow id="sequenceflow1" name="Start Process" sourceRef="startevent1" targetRef="javatempService"/>
+		<serviceTask id="javatempService" name="Validate Temperature task" activiti:class="com.test.markers.TemperatureDelegate" />
+		<sequenceFlow id="sequenceflow2" name="Validate Crop" sourceRef="javatempService" targetRef="javaCropService"/>
+		<serviceTask id="javaCropService" name="Validate Crop task" activiti:class="com.test.markers.CropDelegate" />
+		<sequenceFlow id="sequenceflow3" name="End Process" sourceRef="javaCropService" targetRef="endevent1"/>
+		<endEvent id="endevent1" name="End"/>
+	</process>
+</definitions>
